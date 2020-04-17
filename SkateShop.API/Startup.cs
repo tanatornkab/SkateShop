@@ -16,7 +16,7 @@ namespace SkateShop.API
 {
     public class Startup
     {
-        readonly string MyPolicyName = "AllowMyOrigin";
+        readonly string MyPolicyName = "AllowOrigin";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,12 +27,9 @@ namespace SkateShop.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddDbContext<SkateboardContext>(opt =>
-              opt.UseSqlServer(Configuration.GetConnectionString("SkateboardConnex"))//set connect appsetting.json
-              .EnableSensitiveDataLogging()
-            );
+           
             services.AddRouting(r => r.SuppressCheckForUnhandledSecurityMetadata = true);
+            //var allowedOrigins = Configuration.GetValue<string>(MyPolicyName)?.Split(",") ?? new string[0];
             services.AddCors(options =>
             {
                 options.AddPolicy(MyPolicyName,
@@ -43,6 +40,13 @@ namespace SkateShop.API
                         .AllowAnyMethod();
                 });
             });
+
+            services.AddControllers();
+            services.AddDbContext<SkateboardContext>(opt =>
+             opt.UseSqlServer(Configuration.GetConnectionString("SkateboardConnex"))//set connect appsetting.json
+             .EnableSensitiveDataLogging()
+           );
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

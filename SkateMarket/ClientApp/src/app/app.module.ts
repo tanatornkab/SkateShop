@@ -11,7 +11,9 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { MarketComponent } from './market/market.component';
 import { DeckService } from './market/shared/deck.service';
-
+import { AccordionModule } from 'primeng/accordion';    
+import { MenuItem } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +24,7 @@ import { DeckService } from './market/shared/deck.service';
     MarketComponent
   ],
   imports: [
+    ButtonModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,

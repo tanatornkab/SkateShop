@@ -11,9 +11,9 @@ using SkateShop.Domain;
 
 namespace SkateShop.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    [EnableCors("AllowMyOrigin")]
+    [EnableCors("AllowOrigin")]
     public class DecksController : Controller
     {
         private readonly SkateboardContext _context;
@@ -22,27 +22,20 @@ namespace SkateShop.API.Controllers
         {
             _context = context;
         }
-        [EnableCors("AllowMyOrigin")]
-
-        // GET: api/Decks
+     
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Deck>>> GetDeck()
+        public List<Deck> GetDecks()
         {
-            return await _context.Deck.ToListAsync();
+            List<Deck> model = _context.Deck.ToList();
+            return model;
         }
 
         // GET: api/Decks/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Deck>> GetDeck(int id)
+        public Deck GetDeck(int id)
         {
-            var deck = await _context.Deck.FindAsync(id);
-
-            if (deck == null)
-            {
-                return NotFound();
-            }
-
-            return deck;
+            Deck model = _context.Deck.Find(id);
+            return model;
         }
 
         // PUT: api/Decks/5
