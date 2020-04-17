@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { MarketComponent } from './market/market.component';
-import { MarketService } from './market/shared/market.service';
+import { DeckService } from './market/shared/deck.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import { MarketService } from './market/shared/market.service';
     ])
   ],
   providers: [
-    MarketService
+    DeckService
   ],
   bootstrap: [AppComponent]
 })

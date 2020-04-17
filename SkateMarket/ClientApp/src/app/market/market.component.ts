@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { MarketService } from './shared/market.service';
 import { Deck } from './shared/deck.model';
 import { DatePipe } from '@angular/common';
+import { DeckService } from './shared/deck.service';
 
 @Component({
   selector: 'app-market',
@@ -10,15 +10,14 @@ import { DatePipe } from '@angular/common';
 })
 export class MarketComponent {
   deck: Deck;
-  constructor(private marketService: MarketService, private datepipe: DatePipe) { }
+  constructor(private deckService: DeckService, private datepipe: DatePipe) { }
 
   ngOnInit() {
     this.loadTable();
   }
 
   loadTable() {
-    this.marketService.getDecks().then(res => {
-     
+    this.deckService.getDecks().then(res => {
       res.postDate = this.datepipe.transform(res.postDate, 'MM/dd/yyyy');
       this.deck = res;
     })

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class MarketService {
+export class DeckService {
   private configUrl = 'http://localhost:4000/api/';
   constructor(private http: HttpClient) { }
 
