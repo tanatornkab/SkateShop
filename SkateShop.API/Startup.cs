@@ -16,6 +16,7 @@ namespace SkateShop.API
 {
     public class Startup
     {
+        readonly string MyPolicyName = "AllowMyOrigin";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,16 +31,29 @@ namespace SkateShop.API
             services.AddDbContext<SkateboardContext>(opt =>
               opt.UseSqlServer(Configuration.GetConnectionString("SkateboardConnex"))//set connect appsetting.json
               .EnableSensitiveDataLogging()
-          );
+            );
+            services.AddRouting(r => r.SuppressCheckForUnhandledSecurityMetadata = true);
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyPolicyName,
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(MyPolicyName);
 
             app.UseRouting();
 
@@ -49,6 +63,7 @@ namespace SkateShop.API
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

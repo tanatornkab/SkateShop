@@ -1,4 +1,24 @@
-hi bro
+
   <div *ngFor="let item of deck">
-    {{item.brand}}
+    
   </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>deck</th>
+        <th>size</th>
+        <th>price</th>
+        <th>postDate</th>
+        <th style="50px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of deck">
+        <td>{{item.brand}}</td>
+        <td>{{item.size}}</td>
+        <td>{{item.postDate}}</td>
+        <td>{{item.price}}</td>
+        <button type="button" class="btn btn-danger">Buy</button>
+      </tr>
+    </tbody>
+  </table>

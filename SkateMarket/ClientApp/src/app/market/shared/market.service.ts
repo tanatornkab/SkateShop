@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Deck } from './deck.model';
-import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class MarketService {
-  private configUrl = 'http://localhost:4000/api/Decks';
+  private configUrl = 'http://localhost:4000/api/';
   constructor(private http: HttpClient) { }
 
-  getDecks(): Observable<Deck[]> {
-    return this.http.get<Deck[]>('http://localhost:4000/api/Decks');
+  getDecks() {
+    return this.http.get<any>(this.configUrl + 'Decks').toPromise();
   }
 }

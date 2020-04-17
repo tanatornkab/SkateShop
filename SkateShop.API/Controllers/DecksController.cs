@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,8 @@ namespace SkateShop.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DecksController : ControllerBase
+    [EnableCors("AllowMyOrigin")]
+    public class DecksController : Controller
     {
         private readonly SkateboardContext _context;
 
@@ -20,6 +22,7 @@ namespace SkateShop.API.Controllers
         {
             _context = context;
         }
+        [EnableCors("AllowMyOrigin")]
 
         // GET: api/Decks
         [HttpGet]
