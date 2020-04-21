@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "ng g c": "ng g c",
     "start": "ng serve",
     "build": "ng build",
     "build:ssr": "ng run SkateMarket:server:dev",

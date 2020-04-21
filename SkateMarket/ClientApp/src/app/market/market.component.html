@@ -1,24 +1,55 @@
 
-  <div *ngFor="let item of deck">
-    
+<div *ngFor="let item of deck">
+
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>deck</th>
+      <th>size</th>
+      <th>postDate</th>
+      <th>price</th>
+      <th style="50px;"></th>
+      <th style="50px;"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of deck">
+      <td>{{item.brand}}</td>
+      <td>{{item.size}}</td>
+      <td>{{item.postDate}}</td>
+      <td>{{item.price}}</td>
+      <button type="button" class="btn btn-warning" (click)="view(item)">view</button>
+      <button type="button" class="btn btn-danger" (click)="delete(item.id)">delete</button>
+    </tr>
+  </tbody>
+</table>
+
+<table *ngIf="showview">
+  <tr>Deck : {{deckitem.brand}}</tr>
+  <tr> Price : {{deckitem.price}}</tr>
+  <tr> Size : {{deckitem.size}}</tr>
+  <tr> PostDate : {{deckitem.postDate.substring(0,10)}}</tr>
+</table>
+
+<br>
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+  <div>
+    <label>brand</label>
+    <input type="text" name="Brand" [(ngModel)]="deckitem.brand"  formControlName="Brand" />
   </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>deck</th>
-        <th>size</th>
-        <th>postDate</th>
-        <th>price</th>
-        <th style="50px;"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of deck">
-        <td>{{item.brand}}</td>
-        <td>{{item.size}}</td>
-        <td>{{item.postDate}}</td>
-        <td>{{item.price}}</td>
-        <button type="button" class="btn btn-danger">Buy</button>
-      </tr>
-    </tbody>
-  </table>
+  <div>
+    <label>postDate</label>
+    <input type="date" name="PostDate" [(ngModel)]="deckitem.postDate"  formControlName="PostDate" />
+  </div>
+  <div>
+    <label>size</label>
+    <input type="number" name="Size" [(ngModel)]="deckitem.size"  formControlName="Size" />
+  </div>
+  <div>
+    <label>price</label>
+    <input type="number" name="Price" [(ngModel)]="deckitem.price" formControlName="Price" />
+  </div>
+  <input type="submit" />
+</form>
+

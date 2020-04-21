@@ -74,12 +74,19 @@ namespace SkateShop.API.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Deck>> PostDeck(Deck deck)
+        public string AddDeck(Deck deck)
         {
-            _context.Deck.Add(deck);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Deck.Add(deck);
+                _context.SaveChanges();
+                return "successs";
 
-            return CreatedAtAction("GetDeck", new { id = deck.Id }, deck);
+            }
+            catch (Exception e )
+            {
+                return e+"Error";
+            }
         }
 
         // DELETE: api/Decks/5
